@@ -1,10 +1,11 @@
 import site
 site.addsitedir(r"R:\Pipe_Repo\Users\Qurban\utilities")
-from uiContainer import uic
+try:
+    from uiContainer import uic
+except:
+    from PyQt4 import uic
 from PyQt4.QtGui import *
 from PyQt4.QtCore import Qt
-
-site.addsitedir(r"R:\Pipe_Repo\Users\Hussain\packages")
 import qtify_maya_window as qtfy
 
 import os.path as osp
@@ -28,6 +29,11 @@ class Window(Form, Base):
         import appUsageApp
         appUsageApp.updateDatabase('MayaToArnold')
         
+    def closeEvent(self, event):
+        self.deleteLater()
+        
+    def hideEvent(self, event):
+        self.close()
         
     def materials(self):
         materials = []
